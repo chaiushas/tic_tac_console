@@ -58,9 +58,12 @@ def check_game_state():
     if num_array[2] == num_array[4] and num_array[4] == num_array[6]:
         print(f"Laimejo {num_array[2]}")
         return True
+    if all(isinstance(x, str) for x in num_array):
+        print("Lygiosios!")
+        return True
 
 
-def game_state(state):# True = veikia, False = neveikia
+def game_state(state):  # True = veikia, False = neveikia
     turn = 0
     while state:
         if check_game_state():
