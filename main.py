@@ -1,11 +1,12 @@
 class BoardNum:
-    def __init__(self, num_array=None, win_x=0, win_o=0, draw=0):
+    def __init__(self, num_array=None, win_x=0, win_o=0, draw=0, play_again=0):
         if num_array is None:
             num_array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         self.num_array = num_array
         self.win_x = win_x
         self.win_o = win_o
         self.draw = draw
+        self.play_again = play_again
 
     class WinCounter:
         def __init__(self, win_x=0, win_o=0, draw=0):
@@ -107,10 +108,12 @@ class BoardNum:
     def game_state(self):
         turn = 0
         while True:
-            objektas.num_array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-            play_game = int(input("Ar norite žaisti? 1 - Taip, 2 - Ne "))
-            if play_game == 2:
-                break
+            if objektas.play_again == 1:
+                will_play = int(input("Ar norite zaisti dar karta? 1 - TAIP, 2 - NE"))
+                if will_play == 1:
+                    objektas.num_array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+                else:
+                    break
             while True:
                 turn += 1
                 if objektas.check_game_state():
@@ -118,6 +121,7 @@ class BoardNum:
                     print(f"Kryziuku pergales: {objektas.win_x}\n"
                           f"Nuliuku pergales: {objektas.win_o}\n"
                           f"Lygiosios: {objektas.draw}")
+                    objektas.play_again = 1
                     break
                 objektas.game_window()
                 if turn % 2 == 0:
